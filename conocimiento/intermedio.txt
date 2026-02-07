@@ -1,0 +1,24 @@
+En la agronomía, la conservación de la energía mecánica se aplica al analizar sistemas
+como el riego por gravedad, el movimiento de maquinaria y el transporte de materiales.
+
+En el riego por gravedad:
+- El agua parte de una altura mayor, con energía potencial.
+- Al descender por el terreno, esta energía se transforma en energía cinética.
+- La pendiente del suelo controla la velocidad del agua.
+- Pendientes muy pronunciadas aumentan la erosión.
+- Pendientes suaves permiten un riego más uniforme.
+
+En maquinaria agrícola:
+- El motor entrega energía que se transforma en movimiento.
+- Parte de la energía se pierde por fricción con el suelo.
+- El tipo de terreno influye en el rendimiento energético.
+
+En terrenos agrícolas, la conservación de la energía ayuda a:
+- Diseñar pendientes adecuadas.
+- Reducir pérdidas de energía.
+- Mejorar la eficiencia del riego y la maquinaria.
+
+Este enfoque permite tomar decisiones técnicas basadas en el comportamiento energético
+del sistema agrícola.
+
+

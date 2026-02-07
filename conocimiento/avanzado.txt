@@ -1,0 +1,55 @@
+En condiciones reales de campo, la conservación de la energía mecánica no es perfecta
+debido a la presencia de fuerzas no conservativas.
+
+Las principales fuentes de pérdida de energía en agronomía son:
+- Fricción entre el suelo y el agua.
+- Rozamiento entre ruedas y terreno.
+- Resistencia del suelo al movimiento.
+- Transformación de energía mecánica en calor.
+
+En el análisis de riego por gravedad, el balance energético permite estimar:
+- Velocidad del flujo de agua.
+- Energía disipada por fricción.
+- Riesgo de erosión del suelo.
+
+En maquinaria agrícola, el análisis energético considera:
+- Trabajo realizado por el motor.
+- Energía útil transformada en movimiento.
+- Pérdidas energéticas por eficiencia mecánica.
+
+El estudio de la conservación de la energía mecánica en agronomía permite:
+- Optimizar sistemas productivos.
+- Reducir consumo energético.
+- Minimizar el impacto sobre el suelo.
+- Mejorar la sostenibilidad agrícola.
+
+Este enfoque integra principios de física con criterios agronómicos y ambientales.
+
+En sistemas agrícolas reales, la conservación de la energía mecánica se ve afectada
+por fuerzas no conservativas como la fricción y la resistencia del suelo.
+
+El balance energético general se expresa como:
+Ep₁ + Ec₁ + W = Ep₂ + Ec₂
+
+Donde:
+- W representa el trabajo realizado por fuerzas externas.
+- La diferencia entre energías indica pérdidas o aportes energéticos.
+
+En riego por gravedad, parte de la energía se pierde por:
+- Fricción del agua con el suelo.
+- Rugosidad del canal.
+- Turbulencia del flujo.
+
+En maquinaria agrícola, el análisis energético considera:
+- Trabajo del motor: W = F · d
+- Pérdidas por rozamiento con el suelo.
+- Eficiencia mecánica del sistema.
+
+La eficiencia energética se expresa como:
+η = (Energía útil / Energía total) · 100
+
+Este análisis permite:
+- Optimizar pendientes agrícolas.
+- Reducir consumo energético.
+- Minimizar erosión del suelo.
+- Diseñar sistemas agrícolas más sostenibles.
