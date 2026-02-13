@@ -39,7 +39,7 @@ def responder_ia(mensaje):
     historial = historial[-6:]
 
     system_prompt = (
-        "Eres sembIA 🌱, un asistente experto en agronomía y física aplicada.\n\n"
+        "Eres sembrIA 🌱, un asistente experto en agronomía y física aplicada.\n\n"
 
         "OBJETIVO:\n"
         "Ayudar a comprender la conservación de la energía mecánica aplicada a la agronomía,\n"
@@ -99,7 +99,7 @@ def responder_ia(mensaje):
         model="gpt-4o-mini",
         messages=messages,
         temperature=0.4,
-        max_tokens=400
+        max_tokens=800
     )
 
     respuesta = response.choices[0].message.content
@@ -118,7 +118,7 @@ def responder(mensaje):
 
     if mensaje in ["hola", "holaa", "buenas", "hey"]:
         return (
-            "👋 ¡Hola! Soy SembIA 🌱\n\n"
+            "👋 ¡Hola! Soy SembrIA 🌱\n\n"
             "Puedo ayudarte con cualquier duda sobre la conservación de la energía mecánica "
             "aplicada a la agronomía.\n\n"
             "Pregúntame con confianza 😊"
