@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>sembIA</title>
+<title>sembrIA</title>
 
 <style>
 :root {
@@ -25,6 +25,7 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
+    scroll-behavior: smooth;
 }
 
 .chat-app {
@@ -70,6 +71,12 @@ body {
     font-size: 14px;
     line-height: 1.6;
     white-space: pre-wrap;
+    animation: fadeIn 0.25s ease-in-out;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(5px); }
+    to { opacity: 1; transform: translateY(0); }
 }
 
 .bot {
@@ -103,6 +110,13 @@ input {
     border-radius: 10px;
     border: 1px solid #cbd5e0;
     font-size: 14px;
+    transition: 0.2s;
+}
+
+input:focus {
+    outline: none;
+    border-color: var(--primary);
+    box-shadow: 0 0 0 2px rgba(31,122,95,0.15);
 }
 
 button {
@@ -113,6 +127,18 @@ button {
     color: white;
     font-size: 14px;
     cursor: pointer;
+    transition: 0.2s;
+}
+
+button:hover {
+    background: #16634d;
+    transform: translateY(-1px);
+}
+
+/* Línea visual automática cuando la IA usa --- */
+.divider-line {
+    border-top: 1px solid #d1d5db;
+    margin: 12px 0;
 }
 
 /* 📱 CELULAR */
@@ -132,14 +158,13 @@ button {
 <div class="chat-app">
 
     <div class="header">
-        <h1>sembIA 🌱</h1>
+        <h1>sembrIA 🌱</h1>
         <span>Conservación de la energía mecánica</span>
     </div>
 
     <div id="chat" class="chat">
-        <!-- MENSAJE INICIAL -->
         <div class="message bot">
-            👋 Hola, soy <strong>sembIA 🌱</strong>.<br><br>
+            👋 Hola, soy <strong>sembrIA 🌱</strong>.<br><br>
             Pregúntame algo relacionado con la
             <strong>conservación de la energía mecánica aplicada a la agronomía</strong>
             y te ayudo 😊
@@ -161,19 +186,16 @@ async function enviar() {
 
     if (!texto) return;
 
-    // Mensaje del usuario
     chat.innerHTML += `<div class="message user">${texto}</div>`;
     input.value = "";
     chat.scrollTop = chat.scrollHeight;
 
-    // Indicador escribiendo...
     const typingDiv = document.createElement("div");
     typingDiv.className = "message bot typing";
     typingDiv.innerText = "sembIA está escribiendo…";
     chat.appendChild(typingDiv);
     chat.scrollTop = chat.scrollHeight;
 
-    // Llamada al backend
     const response = await fetch("/chat", {
         method: "POST",
         headers: {"Content-Type": "application/json"},
@@ -181,31 +203,29 @@ async function enviar() {
     });
 
     const data = await response.json();
-
-    // Quitar escribiendo...
     chat.removeChild(typingDiv);
 
-    // Burbuja del bot
     const botDiv = document.createElement("div");
     botDiv.className = "message bot";
     chat.appendChild(botDiv);
 
-    // Efecto escritura (SIN SONIDO)
-    escribirTexto(botDiv, data.respuesta, 15);
+    escribirTexto(botDiv, formatearRespuesta(data.respuesta), 15);
 }
 
-// Escritura progresiva tipo ChatGPT
+function formatearRespuesta(texto) {
+    return texto.replace(/---/g, '<div class="divider-line"></div>');
+}
+
 function escribirTexto(elemento, texto, velocidad) {
     let i = 0;
     const intervalo = setInterval(() => {
         elemento.innerHTML += texto.charAt(i);
-        i++;
         elemento.scrollIntoView({behavior: "smooth", block: "end"});
+        i++;
         if (i >= texto.length) clearInterval(intervalo);
     }, velocidad);
 }
 
-// Enter para enviar
 document.getElementById("mensaje").addEventListener("keydown", e => {
     if (e.key === "Enter") enviar();
 });
@@ -213,5 +233,3 @@ document.getElementById("mensaje").addEventListener("keydown", e => {
 
 </body>
 </html>
-
-
