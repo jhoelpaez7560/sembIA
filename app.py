@@ -12,25 +12,12 @@ client = OpenAI(
 )
 
 # ==============================
-# CARGAR CONOCIMIENTO
-# ==============================
-def cargar_conocimiento():
-    textos = []
-    for archivo in ["basico.txt", "intermedio.txt", "avanzado.txt"]:
-        ruta = os.path.join("conocimiento", archivo)
-        with open(ruta, "r", encoding="utf-8") as f:
-            textos.append(f.read())
-    return "\n\n".join(textos)
-
-CONOCIMIENTO = cargar_conocimiento()
-
-# ==============================
-# MEMORIA DE CONVERSACIÓN
+# MEMORIA SIMPLE
 # ==============================
 historial = []
 
 # ==============================
-# RESPUESTA CON IA
+# FUNCIÓN IA
 # ==============================
 def responder_ia(mensaje):
     global historial
@@ -50,7 +37,7 @@ def responder_ia(mensaje):
         "- Escribe como un profesor que explica con calma.\n"
         "- Habla de tú.\n"
         "- Usa emojis libremente cuando aporten claridad o cercanía.\n"
-        "- Varía los emojis, no repitas siempre los mismos.\n"
+        "- Varía los emojis.\n"
         "- Usa emojis relacionados con agronomía, agua, suelo, energía, campo y maquinaria.\n\n"
 
         "PROHIBIDO:\n"
@@ -61,13 +48,13 @@ def responder_ia(mensaje):
 
         "FORMA DE ORGANIZAR IDEAS:\n"
         "- Separa ideas con saltos de línea.\n"
-        "- Usa frases cortas y claras.\n"
-        "- Introduce ideas con texto, no con números.\n\n"
+        "- Usa frases claras.\n"
+        "- Introduce ideas con texto.\n\n"
 
         "CUANDO USES FÓRMULAS:\n"
-        "- Escríbelas de forma clara y legible.\n"
+        "- Escríbelas claras y legibles.\n"
         "- Usa * para multiplicar y ^ para potencias.\n"
-        "- Evita símbolos raros o compactos.\n\n"
+        "- Evita símbolos compactos.\n\n"
 
         "FORMATO DE FÓRMULAS:\n"
         "Ec = (1 / 2) * m * v^2\n"
@@ -77,29 +64,28 @@ def responder_ia(mensaje):
         "SI RESUELVES UN PROBLEMA:\n"
         "- Explica primero con palabras.\n"
         "- Luego muestra la fórmula.\n"
-        "- Explica qué representa cada variable.\n"
-        "- Interpreta el resultado en el contexto del campo.\n\n"
+        "- Explica variables.\n"
+        "- Interpreta el resultado en contexto agrícola.\n\n"
 
         "REGLAS:\n"
-        "- No repitas mensajes de bienvenida.\n"
-        "- No te salgas del tema de energía mecánica en agronomía.\n"
-        "- Usa solo el conocimiento proporcionado.\n\n"
+        "- No repitas saludos.\n"
+        "- No te salgas del tema de energía mecánica aplicada a agronomía.\n"
+        "- Mantén coherencia académica.\n\n"
 
         "CIERRE:\n"
-        "- Nunca termines de forma brusca.\n"
-        "- Cierra con una idea clara o invitación a seguir."
+        "- Nunca termines abruptamente.\n"
+        "- Cierra con una invitación natural a seguir aprendiendo."
     )
 
     messages = [
-        {"role": "system", "content": system_prompt},
-        {"role": "user", "content": f"CONOCIMIENTO BASE:\n{CONOCIMIENTO}"}
+        {"role": "system", "content": system_prompt}
     ] + historial
 
     response = client.chat.completions.create(
         model="gpt-4o-mini",
         messages=messages,
-        temperature=0.4,
-        max_tokens=800
+        temperature=0.6,
+        max_tokens=850
     )
 
     respuesta = response.choices[0].message.content
@@ -109,28 +95,22 @@ def responder_ia(mensaje):
 
     return respuesta
 
+
 # ==============================
-# RESPUESTA GENERAL
+# LÓGICA GENERAL
 # ==============================
 def responder(mensaje):
-    mensaje_original = mensaje
-    mensaje = mensaje.lower().strip()
+    texto = mensaje.lower().strip()
 
-    if mensaje in ["hola", "holaa", "buenas", "hey"]:
+    if texto in ["hola", "buenas", "hey"]:
         return (
-            "👋 ¡Hola! Soy SembrIA 🌱\n\n"
-            "Puedo ayudarte con cualquier duda sobre la conservación de la energía mecánica "
-            "aplicada a la agronomía.\n\n"
-            "Pregúntame con confianza 😊"
+            "👋 ¡Hola! Soy sembrIA 🌱\n\n"
+            "Estoy aquí para ayudarte con la conservación de la energía mecánica aplicada a la agronomía.\n\n"
+            "Haz tu pregunta y la analizamos juntos 🚜⚙️"
         )
 
-    if mensaje in ["gracias", "muchas gracias"]:
-        return "😊 ¡Con gusto! Si quieres, seguimos profundizando."
+    return responder_ia(mensaje)
 
-    if mensaje in ["adiós", "chau", "hasta luego"]:
-        return "👋 ¡Hasta luego! Aquí estaré cuando lo necesites 🌾"
-
-    return responder_ia(mensaje_original)
 
 # ==============================
 # RUTAS
@@ -139,6 +119,7 @@ def responder(mensaje):
 def index():
     return render_template("index.html")
 
+
 @app.route("/chat", methods=["POST"])
 def chat():
     data = request.get_json()
@@ -146,9 +127,9 @@ def chat():
     respuesta = responder(mensaje)
     return jsonify({"respuesta": respuesta})
 
+
 # ==============================
 # EJECUCIÓN
 # ==============================
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=5000)
-
